@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Java convert lib configuration file.-->
+<!--mysql to postgresql-->
+<KeyWords>
+    <!--Capture keywords in package name.-->
+    <Key kind="package" code="mysql"/>
+</KeyWords>
+
+<Imports>
+    <!--Full name match.-->
+    <!--Allow one to many.-->
+    <item code="com.mysql.cj.jdbc.MysqlDataSource">
+        <change code="org.postgresql.ds.PGSimpleDataSource"/>
+    </item>
+    <item code="com.mysql.cj.exceptions.CJException">
+        <change code="org.postgresql.util.PSQLException"/>
+    </item>
+</Imports>
+
+<Classes>
+    <class src="com.mysql.cj.jdbc.Driver" to="org.postgresql.Driver"/>
+    <class src="MysqlDataSource" to="PGSimpleDataSource"/>
+    <class src="CJException" to="PSQLException"/>
+</Classes>
+
+<Members>
+    <member src="CAPABILITIES_FIELD_NUMBER" to=""/>
+</Members>
+
+<Methods>
+    <!--The setting of parameter attribute determines whether to check.-->
+    <!--No parameter attribute or -1, do not check.-->
+    <!--The setting of parameter list can change the calling order.-->
+    <method src="setServerName" to="setServerName" params="1">
+        <!--new : 1..n-->
+        <!--old : -1 default, 1..n-->
+        <!--type(default): code | string-->
+        <param new="1" default="192.168.1.8" type="string"/>
+    </method>
+    <method src="setPortNumber" to="setPortNumber" params="1">
+        <param new="1" default="5432" type="code"/>
+    </method>
+    <method src="setDatabaseName" to="setDatabaseName" params="1">
+        <param new="1" default="pgdemo" type="string"/>
+    </method>
+    <method src="setUser" to="setUser" params="1">
+        <param new="1" default="admin" type="string"/>
+    </method>
+    <method src="setPassword" to="setPassword" params="1">
+        <param new="1" default="sa" type="string"/>
+    </method>
+    <method src="MysqlDataSource" to="PGSimpleDataSource" params="-1"/>
+    <method src="CJException" to="PSQLException" params="-1"/>
+    <method src="getMessage" to="getMessage" params="-1"/>
+</Methods>
+
+<Words>
+    <word src="mysql" to="postgresql"/>
+</Words>
